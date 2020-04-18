@@ -7,12 +7,11 @@ import shutil
 
 def upload_loGAN():
     #needed to install tensorflow==2.0, keras, tensorflow-gpu==2.0.0
-    print('runs2')
     ssh = paramiko.SSHClient()
     user_name="ubuntu"
-    instance_id="i-024a94e8116283b00"
-    public_ip="3.87.115.233"
-    pem_addr="/home/mbraly/python-for-byte-academy/Final_Project/paramiko_test.pem"
+    instance_id=""
+    public_ip=""
+    pem_addr=""
     aws_region="us-east-1a"
 
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
@@ -27,20 +26,17 @@ def upload_loGAN():
     ftp_client.put('/home/mbraly/python-for-byte-academy/Final_Project/Website/ifp/ifp.npy','ifp.npy')
     ftp_client.put('/home/mbraly/python-for-byte-academy/Final_Project/Website/models/loGan.py','loGAN.py')
     stdin,stdout,stderr=ssh.exec_command("python3 loGAN.py")
-    print(stdout, "+", stderr)
     ftp_client.close()
     ssh.close()
 
 
 def download_images():
-    print('runs3')
     ssh = paramiko.SSHClient()
     user_name="ubuntu"
-    instance_id="i-024a94e8116283b00"
-    public_ip="3.87.115.233"
-    pem_addr="/home/mbraly/python-for-byte-academy/Final_Project/paramiko_test.pem"
+    instance_id=""
+    public_ip=""
+    pem_addr=""
     aws_region="us-east-1a"
-
 
     start = timer()
     
@@ -63,4 +59,3 @@ def download_images():
     ssh.close() 
     end = timer()
     print(end - start)
-

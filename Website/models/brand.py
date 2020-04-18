@@ -59,8 +59,6 @@ class Brand:
                 cur.execute(sql,)
                 name_sim = cur.fetchall()
                 name_counter += 1
-                print(len(name_sim))
-                print(self.brand_name[name_counter:name_counter+2])
                 for i in name_sim:
                     with sqlite3.connect(self.IMG_DBPATH) as conn:
                         cur = conn.cursor()
@@ -81,12 +79,10 @@ class Brand:
                 FROM logos WHERE industry LIKE '%{}%';""".format(self.industry)
                 cur.execute(sql,)
                 industry_sim = cur.fetchall()
-                print(len(industry_sim))
 
                 for i in industry_sim:
                     with sqlite3.connect(self.IMG_DBPATH) as conn:
                         cur = conn.cursor()
-
 
                         sql = """INSERT INTO brands (brand_name)
                         VALUES (?)"""
@@ -98,7 +94,6 @@ class Brand:
                             pass
         if counter < self.MAX_FILES:
             remaining_spots=self.MAX_FILES-counter 
-            print(counter)
             with sqlite3.connect(self.DBPATH) as conn:
                 cur = conn.cursor()
                 sql = """SELECT brand_name FROM logos
@@ -115,8 +110,6 @@ class Brand:
                         cur.execute(sql, (i[0],))
 
         
- 
-
     def make_file(self):
         print("runs 1.5")
         total_list = []
@@ -143,7 +136,6 @@ class Brand:
                         background.paste(image, mask=image.split()[3])
                     else:
                         background.paste(image) 
-                        # 3 is the alpha channel
                     background.save('1.jpg', 'JPEG', quality=80)
                     background = background.resize((self.IMAGE_SHAPE[0], self.IMAGE_SHAPE[1]), 3)
                     training_data.append(np.asarray(background))
@@ -152,7 +144,6 @@ class Brand:
                     training_data.append(np.asarray(image))
                 os.remove(self.FILEPATH+brand_name[0]+".jpg")
             except:
-                #ClientError:
                 pass   
 
         os.remove(self.IMG_DBPATH)

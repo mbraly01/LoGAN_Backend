@@ -26,8 +26,6 @@ def feed():
     brand = Brand(brand_name = data["brand_name"], industry = data["industry"])
     brand.prep_db()
     brand.make_file()
-    # connector.upload_loGAN()
-    # connector.download_images()
     run()
     return data
 
@@ -50,12 +48,16 @@ def addToGallery():
 
 @app.route('/makeGallery', methods=['GET'])
 def makeGallery():
-    # gallery = Gallery()
-    # names = gallery.make_gallery()
-    # print(names)
-    # return jsonify({"names": names})
-    return jsonify({"names": ["Greg", "greg", "Greg_", "greg_", "bill", "logan"]})
+    gallery = Gallery()
+    names = gallery.make_gallery()
+    print(names)
+    return jsonify({"names": names})
 
+@app.route('/downloadGallery', methods=['GET'])
+def downloadGallery():
+    gallery = Gallery()
+    gallery.download_gallery()
+    return jsonify({"complete":"yes"})
     
     
 

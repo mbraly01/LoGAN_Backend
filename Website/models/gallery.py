@@ -19,6 +19,12 @@ class Gallery:
         for item in self.bucket.objects.all():
             stripped_item = item.key.strip(".jpg")
             items.append(stripped_item)
-            self.s3.meta.client.download_file("thegallery",item.key,f"/home/mbraly/python-for-byte-academy/Final_Project/Website/matapp/my-app/public/gallery/{item.key}")
+            # self.s3.meta.client.download_file("thegallery",item.key,f"/home/mbraly/python-for-byte-academy/Final_Project/Website/matapp/my-app/public/gallery/{item.key}")
         return items
 
+    def download_gallery(self):
+        for item in self.bucket.objects.all():
+            self.s3.meta.client.download_file("thegallery",item.key,f"/home/mbraly/python-for-byte-academy/Final_Project/Website/matapp/my-app/public/gallery/{item.key}")
+
+gallery = Gallery()
+gallery.download_gallery()
