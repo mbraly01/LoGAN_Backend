@@ -1,7 +1,5 @@
-#chchchchchanges
 
-#works
-
+#credit to Anish Shrestha . https://towardsdatascience.com/generating-modern-arts-using-generative-adversarial-network-gan-on-spell-39f67f83c7b4
 import os
 import numpy as np
 from PIL import Image
