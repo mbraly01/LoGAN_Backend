@@ -7,10 +7,10 @@ import pysftp
 ##grant administrator access
 ##add to ~/.aws/credentials files
 
-##create instance of resource class
-# s3=boto3.resource("s3")
-# s3_client = boto3.client("s3")
-# #get all buckets
+#create instance of resource class
+s3=boto3.resource("s3")
+s3_client = boto3.client("s3")
+#get all buckets
 
 
 # #print('Loading function')
@@ -72,7 +72,6 @@ for instance in instances:
         p2_instance=instance
         break
 
-'''
 
 ssh = paramiko.SSHClient()
 
@@ -138,16 +137,18 @@ def run_paramiko(ssh):
 #     ftp_client.close()
 #     ssh.close()
 run_paramiko(ssh)
-'''
 
 # close the client connection once the job is done
 
 run_paramiko(ssh)
 
-
+'''
 # get the bucket
 bucket = s3.Bucket('logala')
-
+bucket.objects.all().delete()
+#deletes bucket
+bucket.delete()
+'''
 # use loop and count increment
 count_obj = 0
 for i in bucket.objects.all():
